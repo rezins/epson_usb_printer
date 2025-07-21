@@ -128,8 +128,8 @@ _testPrint({bool withImage = false}){
 
 ## Print a receipt
 ```dart
-List<String> ticket = await getTicketDatecs(withImage: true);
-var result = await DatecsPrinter.printText(ticket);
+final generate = EpsonGenerate(_selectedPrinterName!, _selectedPaper!);
+generate.printText();
 ```
 For a complete example, check the demo project inside examplem forder
 
