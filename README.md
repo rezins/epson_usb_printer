@@ -134,4 +134,4 @@ generate.printText();
 For a complete example, check the demo project inside examplem forder
 
 # Test Print
-<img src="https://github.com/rezins/epson_usb_printer/blob/main/example/assets/test_print.jpg?raw=true" alt="test receipt" height="1600" width="537"/>
+<img src="https://github.com/rezins/epson_usb_printer/blob/main/example/assets/test_print.jpg?raw=true" alt="test receipt" height="537" width="1600"/>

@@ -1,6 +1,6 @@
 name: epson_usb_printer
 description: This plugin allows to print receipts using epson dot matrix printer also provide epson utils to create print receipt more easier
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/rezins/epson_usb_printer.git
 
 environment:
