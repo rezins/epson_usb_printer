@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Downgrade dependency win32 & ffi
+
 ## 1.0.1
 
 * Update README.md

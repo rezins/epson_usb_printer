@@ -1,5 +1,4 @@
 import 'dart:ffi';
-import 'package:epson_usb_printer/src/enums.dart';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 import 'package:epson_usb_printer/src/constans.dart' as cons;
@@ -30,7 +29,7 @@ class EpsonGenerate{
 
     devMode = calloc<DEVMODE>();
     devMode.ref.dmSize = sizeOf<DEVMODE>();
-    devMode.ref.dmFields = DM_PAPERSIZE | DM_PAPERLENGTH | DM_PAPERWIDTH;;
+    devMode.ref.dmFields = DM_PAPERSIZE | DM_PAPERLENGTH | DM_PAPERWIDTH;
     devMode.ref.dmPaperSize = paper.id;
     devMode.ref.dmPaperWidth = (paper.width * 100).round();    // dalam 0.1mm
     devMode.ref.dmPaperLength = (paper.height * 100).round();  // dalam 0.1mm
@@ -175,20 +174,20 @@ class EpsonGenerate{
     var maxCharPerLine = getCharsPerLine() - 5;
 
     for (int i = 0; i < cols.length; ++i) {
-      int max_char_col = ((maxCharPerLine / 12) * cols[i].width).floor();
-      if(cols[i].text.length > max_char_col){
-        var tmp = cols[i].text.substring(0, max_char_col);
+      int maxCharCol = ((maxCharPerLine / 12) * cols[i].width).floor();
+      if(cols[i].text.length > maxCharCol){
+        var tmp = cols[i].text.substring(0, maxCharCol);
         finalText.write(text(tmp, style: cols[i].styles, useRow: true)!);
       }else{
         if(cols[i].styles.align == EpsonAlign.left || cols[i].styles.align == EpsonAlign.center){
-          int restStr = max_char_col - cols[i].text.length;
+          int restStr = maxCharCol - cols[i].text.length;
           var tmp = cols[i].text;
           for(int j = 0; j < restStr; j++){
             tmp += " ";
           }
           finalText.write(text(tmp, style: cols[i].styles, useRow: true)!);
         }else if(cols[i].styles.align == EpsonAlign.right){
-          int restStr = max_char_col - cols[i].text.length;
+          int restStr = maxCharCol - cols[i].text.length;
           var tmp = "";
           for(int j = 0; j < restStr; j++){
             tmp += " ";

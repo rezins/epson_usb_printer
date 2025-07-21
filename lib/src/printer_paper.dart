@@ -1,9 +1,7 @@
 import 'dart:ffi';
 import 'package:epson_usb_printer/model/Paper.dart';
 import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
 
-final _kernel32 = DynamicLibrary.open('kernel32.dll');
 final _winspool = DynamicLibrary.open('winspool.drv');
 
 // Buat typedef untuk deviceCapabilitiesW
@@ -63,7 +61,6 @@ class PrinterPaper{
       final widthCm = point.x / 100.0; // 0.1mm → cm
       final heightCm = point.y / 100.0;
       papers.add(Paper(id, name, widthCm, heightCm));
-      print('Raw size values: ${name} width=${widthCm}, height=${heightCm}');
     }
 
     calloc.free(pDevice);
