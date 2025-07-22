@@ -12,10 +12,11 @@ class EpsonGenerate{
   late bool condense;
 
   int? maxLine;
+  int? paddingEndPaper;
 
   List<String> args = [];
 
-  EpsonGenerate(this.printerName, this.paper, {this.cpi = EpsonCPI.cpi10, this.condense = true, this.maxLine});
+  EpsonGenerate(this.printerName, this.paper, {this.cpi = EpsonCPI.cpi10, this.condense = true, this.maxLine, this.paddingEndPaper});
 
   String? printText() {
     final printerNamePtr = printerName.toNativeUtf16();
@@ -57,6 +58,8 @@ class EpsonGenerate{
     for(final line in args){
       byteList.addAll(line.codeUnits);
     }
+
+    byteList.add(0x0C);
 
     final dataPtr = calloc<Uint8>(byteList.length);
     for (int i = 0; i < byteList.length; i++) {
@@ -171,7 +174,7 @@ class EpsonGenerate{
     }
 
     StringBuffer finalText = StringBuffer();
-    var maxCharPerLine = getCharsPerLine() - 5;
+    var maxCharPerLine = getCharsPerLine() - (paddingEndPaper ?? 0);
 
     for (int i = 0; i < cols.length; ++i) {
       int maxCharCol = ((maxCharPerLine / 12) * cols[i].width).floor();

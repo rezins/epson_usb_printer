@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   Paper? _selectedPaper;
 
   TextEditingController controller = TextEditingController(text: "80");
+  TextEditingController paddingController = TextEditingController(text: "0");
 
   @override
   void initState() {
@@ -81,7 +82,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   _testPrint({bool withImage = false}){
-    final generate = EpsonGenerate(_selectedPrinterName!, _selectedPaper!, maxLine: int.parse(controller.text));
+    final generate = EpsonGenerate(_selectedPrinterName!, _selectedPaper!, maxLine: int.parse(controller.text), paddingEndPaper: int.parse(paddingController.text));
 
     generate.feed(2);
     generate.text("Demo Shop", style: EpsonStyle(
@@ -196,6 +197,12 @@ class _MyAppState extends State<MyApp> {
     generate.printText();
   }
 
+  _paddingEndPaper(){
+    final generate = EpsonGenerate(_selectedPrinterName!, _selectedPaper!,);
+    generate.calibrateActualMaxLine(step: int.parse(controller.text));
+    generate.printText();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -301,6 +308,25 @@ class _MyAppState extends State<MyApp> {
                               color: Colors.white
                           ),
                           ),
+                        )
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const Text(
+                      'Padding End Of Paper:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 30,),
+                    Expanded(
+                        child: TextFormField(
+                          controller: paddingController,
                         )
                     ),
                   ],
