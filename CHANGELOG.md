@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Add paper method fromJson & toJson
+
 ## 1.0.3
 
 * Add Eject paper / flush
